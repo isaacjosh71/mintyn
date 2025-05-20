@@ -13,6 +13,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<User> users = [];
   bool isLoading = true;
+  int selectedIndex = 0;
+  final List<String> tabs = ['Hello', 'Stats', 'Photos', 'About'];
+
 
   @override
   void initState() {
@@ -34,41 +37,52 @@ class _HomeState extends State<Home> {
     if (isLoading) return const Center(child: CircularProgressIndicator());
     final user = users[0];
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        padding: const EdgeInsets.only(left: 12, right: 12),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF1E0F2F),
+              Color(0xFF613659),
+              Color(0xFFB06AB3),
+            ],
+          ),
+        ),
+        child: SafeArea(
           child: Column(
             children: [
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(Icons.arrow_back, color: Colors.white),
-                  Text("Profile", style: TextStyle(color: Colors.white, fontSize: 20)),
                   Icon(Icons.grid_view, color: Colors.white),
                 ],
               ),
               const SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CircleAvatar(radius: 45, backgroundImage: NetworkImage(user.profileImage)),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 8),
                   const CircleAvatar(
+                    radius: 40,
                     backgroundColor: Colors.green,
-                    child: Icon(Icons.question_mark, color: Colors.white),
+                    child: Icon(Icons.chat, color: Colors.white, size: 30,),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: 150,
+                    width: 180,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white10,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -76,16 +90,16 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text("🌞", style: TextStyle(fontSize: 20)),
                         const SizedBox(height: 8),
-                        const Text('Growing Place', style: TextStyle(color: Colors.white54)),
-                        Text(user.place, style: const TextStyle(color: Colors.white)),
+                        const Text('Growing Place', style: TextStyle(color: Colors.black87)),
+                        Text(user.place, style: const TextStyle(color: Colors.black)),
                       ],
                     ),
                   ),
                   Container(
-                    width: 150,
+                    width: 180,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.white10,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -93,44 +107,95 @@ class _HomeState extends State<Home> {
                       children: [
                         const Text("📍", style: TextStyle(fontSize: 20)),
                         const SizedBox(height: 8),
-                        Text(user.place, style: const TextStyle(color: Colors.white54)),
-                        Text(user.location, style: const TextStyle(color: Colors.white)),
+                        Text(user.place, style: const TextStyle(color: Colors.black87)),
+                        Text(user.location, style: const TextStyle(color: Colors.black)),
                       ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  statCard("Years", user.years.toString()),
-                  statCard("Helps", user.help.toString()),
-                  statCard("Pounds", user.pounds.toString()),
+                  statCard("Years", user.years.toString(), Colors.yellow),
+                  statCard("Helps", user.help.toString(), Colors.orangeAccent),
+                  statCard("Pounds", user.pounds.toString(), Colors.grey),
                 ],
               ),
-              const SizedBox(height: 20),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("${user.plants} plants", style: const TextStyle(color: Colors.white)),
-              ),
-              Wrap(
-                spacing: 10,
-                children: user.tags
-                    .map((tag) => Chip(label: Text(tag), backgroundColor: Colors.white10, labelStyle: TextStyle(color: Colors.white)))
-                    .toList(),
+              const SizedBox(height: 24),
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.tealAccent.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("${user.plants} plants", style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
+                            const SizedBox(height: 8),
+                            Wrap(
+                              spacing: 10,
+                              children: user.tags
+                                  .map((tag) => Chip(label: Text(tag), backgroundColor: Colors.white10, labelStyle: const TextStyle(color: Colors.black87)))
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                       const Row(
+                         children: [
+                           CircleAvatar(
+                                backgroundColor: Colors.white38,
+                                child: Icon(Icons.settings, color: Colors.white)),
+                           SizedBox(width: 8,),
+                           CircleAvatar(
+                               backgroundColor: Colors.white38,
+                               child: Icon(Icons.arrow_forward, color: Colors.white)),
+                         ],
+                       ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  bottomButton("Hello"),
-                  bottomButton("Stats"),
-                  bottomButton("Photos"),
-                  bottomButton("About"),
-                ],
+                children: List.generate(tabs.length, (index) {
+                  final isSelected = index == selectedIndex;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      decoration: BoxDecoration(
+                        color: isSelected ? Colors.white : Colors.black,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Text(
+                        tabs[index],
+                        style: TextStyle(
+                          color: isSelected ? Colors.black : Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -138,19 +203,20 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget statCard(String label, String value) {
+  Widget statCard(String label, String value, Color color) {
     return Container(
-      width: 100,
+      width: 120,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Colors.orange.shade700,
+        color: color,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(color: Colors.white70)),
+          Text(label, style: const TextStyle(color: Colors.black87)),
           const SizedBox(height: 5),
-          Text(value, style:const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(value, style:const TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -159,12 +225,12 @@ class _HomeState extends State<Home> {
   Widget bottomButton(String label) {
     return ElevatedButton(
       onPressed: () {},
-      child: Text(label),
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white10,
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
+      child: Text(label),
     );
   }
 }

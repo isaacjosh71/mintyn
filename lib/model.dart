@@ -27,7 +27,7 @@ class User {
       help: json['help'],
       pounds: json['pounds'],
       plants: json['plants'],
-      tags: json['tags'],
+      tags: List<String>.from(json['tags']),
       profileImage: json['profileImage'],
     );
   }

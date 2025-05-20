@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text('Growing Place', style: TextStyle(color: Colors.black87)),
-                            Text(user.place, style: const TextStyle(color: Colors.black)),
+                            Text(user.place, style: const TextStyle(color: Colors.black,fontSize: 18)),
                           ],
                         ),
                       ],
@@ -117,8 +117,8 @@ class _HomeState extends State<Home> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(user.place, style: const TextStyle(color: Colors.black87)),
-                            Text(user.location, style: const TextStyle(color: Colors.black)),
+                            const Text('Location', style: TextStyle(color: Colors.black87)),
+                            Text(user.location, style: const TextStyle(color: Colors.black, fontSize: 18)),
                           ],
                         ),
                       ],
@@ -138,10 +138,10 @@ class _HomeState extends State<Home> {
               const SizedBox(height: 24),
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.tealAccent.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.greenAccent.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(24),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,8 +154,8 @@ class _HomeState extends State<Home> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("${user.plants} plants", style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600)),
-                            const SizedBox(height: 8),
+                            Text("${user.plants} plants", style: const TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w600)),
+                            const SizedBox(height: 16,),
                             Wrap(
                               spacing: 10,
                               children: user.tags

@@ -80,6 +80,7 @@ class _HomeState extends State<Home> {
                 children: [
                   Container(
                     width: 180,
+                    height: 120,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -87,16 +88,22 @@ class _HomeState extends State<Home> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("🌞", style: TextStyle(fontSize: 20)),
-                        const SizedBox(height: 8),
-                        const Text('Growing Place', style: TextStyle(color: Colors.black87)),
-                        Text(user.place, style: const TextStyle(color: Colors.black)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Growing Place', style: TextStyle(color: Colors.black87)),
+                            Text(user.place, style: const TextStyle(color: Colors.black)),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                   Container(
                     width: 180,
+                    height: 120,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -104,11 +111,16 @@ class _HomeState extends State<Home> {
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text("📍", style: TextStyle(fontSize: 20)),
-                        const SizedBox(height: 8),
-                        Text(user.place, style: const TextStyle(color: Colors.black87)),
-                        Text(user.location, style: const TextStyle(color: Colors.black)),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(user.place, style: const TextStyle(color: Colors.black87)),
+                            Text(user.location, style: const TextStyle(color: Colors.black)),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -156,11 +168,11 @@ class _HomeState extends State<Home> {
                          children: [
                            CircleAvatar(
                                 backgroundColor: Colors.white38,
-                                child: Icon(Icons.settings, color: Colors.white)),
+                                child: Icon(Icons.settings, color: Colors.grey)),
                            SizedBox(width: 8,),
                            CircleAvatar(
                                backgroundColor: Colors.white38,
-                               child: Icon(Icons.arrow_forward, color: Colors.white)),
+                               child: Icon(Icons.arrow_forward, color: Colors.grey)),
                          ],
                        ),
                       ],
